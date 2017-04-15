@@ -12,11 +12,17 @@
 
 int main(int argc, char* argv[])
 {
-    if (argc !=3)
+    if (argc ! = 3)
     {
         printf("usage ./crypt password salt\n");
         return -1;
     }
+    if (argv[2][1] == 0)
+    {
+        printf("Salt must be at least 2 chars long. (extra will be ignored)\n");
+        return -2;
+    }
+    
     printf("%s\n", crypt(argv[1],argv[2]));
     return 0;
 }
