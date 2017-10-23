@@ -1,7 +1,9 @@
 /* scoreC.c
 *   compute edit distance between two texts
 *   (assumes plain ascii text)
-*
+*   implemented with 2 arrays (one for optimal score and 
+*   the other for the operation taken)
+*   
 *   brenda anderson
 *   2017-10-23
 */
@@ -15,7 +17,7 @@
 
 
 // Prototypes
-void init(int* score, int* op, int rows, int cols);
+void init_matrix(int* score, int* op, int rows, int cols);
 void fill_matrix(int *score, int *op, int rows, int col, char *f1, char *f2 );
 void print_matrix(int *score, int *op, int rows, int cols);
 
@@ -26,7 +28,7 @@ int main(int argc, char *argv[])
         printf("usage: ./scoreC FILE1 FILE2");
     }
 
-    // verify the two files can be opened
+    // Verify the two files can be opened
     FILE *file1 = fopen(argv[1], "r");
     if (file1 == NULL)
     {
@@ -41,7 +43,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // get file lengths to dynamically allocate the memory needed to store as strings
+    // Get file lengths to dynamically allocate the memory needed to store as strings
     fseek(file1, 0, SEEK_END);
     int len1 = ftell(file1);
     fseek(file1, 0, SEEK_SET);
@@ -54,13 +56,13 @@ int main(int argc, char *argv[])
     int cols = len2 + 1;
     printf("rows: %i\ncols: %i\n", rows, cols);
 
-    // get memory for each string
+    // Get memory for each string
     char *f1 = malloc(rows);
     if (f1 == NULL) return -1;
     char *f2 = malloc(cols);
     if (f2 == NULL) return -1;
 
-    // read files into string
+    // Read files into string
     fread(f1, 1, len1, file1);
     f1[len1] = '\0';
     fread(f2, 1, len2, file2);
@@ -69,22 +71,21 @@ int main(int argc, char *argv[])
     int *score = calloc(1,rows*cols*sizeof(int));
     int *op = calloc(1,rows*cols*sizeof(int));
 
-    // initialize the matrix
-    init(score, op, rows, cols);
+    // Initialize the matrix
+    init_matrix(score, op, rows, cols);
 
-    // fill the matrix
+    // Fill the matrix
     fill_matrix(score, op, rows, cols, f1, f2);
 
-    // print matrix for debugging
-   // print_matrix(score, op, rows, cols);
-
-    //printf("Text1:\n %s\n", f1);
-    //printf("Text2:\n %s\n", f2);
-
-
+    // DEBUG printing
+    // printf("Text1:\n %s\n", f1);
+    // printf("Text2:\n %s\n", f2);
+    // print_matrix(score, op, rows, cols);
+    
+   // Final score 
    printf("%i\n", score[len1*cols + len2]);
 
-   // tidy up
+   // Tidy up
    free(score);
    free(op);
    free(f1);
@@ -95,8 +96,10 @@ int main(int argc, char *argv[])
    return 0;
 }
 
-
-void init(int* score, int* op, int rows, int cols)
+/*
+* Sets the first row and column based on text lengths
+*/
+void init_matrix(int* score, int* op, int rows, int cols)
 {
 
     score[0] = 0;
@@ -114,7 +117,9 @@ void init(int* score, int* op, int rows, int cols)
     }
 
 }
-
+/*
+* Calculates the scores for each cell based on the chars in the text
+*/
 void fill_matrix(int *score, int *op, int rows, int cols, char *f1, char *f2 )
 {
     int lowest_score = 0, lowest_op = 0, s = 0, d = 0, i = 0;
@@ -123,7 +128,7 @@ void fill_matrix(int *score, int *op, int rows, int cols, char *f1, char *f2 )
     {
         for (int col = 1; col < cols; col++)
         {
-           //substitution first as that is potential lowest cost
+           // Substitution first as that is potential lowest cost
            if (f1[row-1] == f2[col-1])
             {
                 s = score[(row-1)*cols + col-1];
@@ -135,7 +140,7 @@ void fill_matrix(int *score, int *op, int rows, int cols, char *f1, char *f2 )
             lowest_score = s;
             lowest_op = SUBSTITUTED;
 
-           // deletion
+           // Deletion
             d = score[(row-1)*cols + col] + 1;
             if (d < lowest_score)
             {
@@ -143,20 +148,24 @@ void fill_matrix(int *score, int *op, int rows, int cols, char *f1, char *f2 )
                 lowest_op = DELETED;
             }
 
-           // insertion
+           // Insertion
             i = score[row*cols + col-1] + 1;
             if (i < lowest_score)
             {
                 lowest_score = i;
                 lowest_op = INSERTED;
             }
+            
+            // Now fill the cell with the optimal path values
             score[row*cols + col] = lowest_score;
             op[row*cols + col] = lowest_op;
         }
     }
-
 }
 
+/*
+* Prints the matrix for debugging purposes
+*/
 void print_matrix(int *score, int* op, int rows, int cols)
 {
        for (int r = 0; r < rows; r++)
