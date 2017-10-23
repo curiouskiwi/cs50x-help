@@ -10,16 +10,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #define DELETED 1
 #define INSERTED 2
 #define SUBSTITUTED 3
 
+TYPEDEF uint8_t BYTE
 
 // Prototypes
-void init_matrix(int* score, int* op, int rows, int cols);
-void fill_matrix(int *score, int *op, int rows, int col, char *f1, char *f2 );
-void print_matrix(int *score, int *op, int rows, int cols);
+void init_matrix(short* score, BYTE* op, int rows, int cols);
+void fill_matrix(short *score, BYTE *op, int rows, int col, char *f1, char *f2 );
+void print_matrix(short *score, BYTE *op, int rows, int cols);
 
 int main(int argc, char *argv[])
 {
@@ -68,8 +70,8 @@ int main(int argc, char *argv[])
     fread(f2, 1, len2, file2);
     f2[len2] = '\0';
 
-    int *score = calloc(1,rows*cols*sizeof(int));
-    int *op = calloc(1,rows*cols*sizeof(int));
+    short *score = calloc(1,rows*cols*sizeof(short));
+    BYTE *op = calloc(1,rows*cols*sizeof(BYTE));
 
     // Initialize the matrix
     init_matrix(score, op, rows, cols);
@@ -99,7 +101,7 @@ int main(int argc, char *argv[])
 /*
 * Sets the first row and column based on text lengths
 */
-void init_matrix(int* score, int* op, int rows, int cols)
+void init_matrix(short* score, BYTE* op, int rows, int cols)
 {
 
     score[0] = 0;
@@ -120,7 +122,7 @@ void init_matrix(int* score, int* op, int rows, int cols)
 /*
 * Calculates the scores for each cell based on the chars in the text
 */
-void fill_matrix(int *score, int *op, int rows, int cols, char *f1, char *f2 )
+void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 )
 {
     int lowest_score = 0, lowest_op = 0, s = 0, d = 0, i = 0;
 
@@ -166,7 +168,7 @@ void fill_matrix(int *score, int *op, int rows, int cols, char *f1, char *f2 )
 /*
 * Prints the matrix for debugging purposes
 */
-void print_matrix(int *score, int* op, int rows, int cols)
+void print_matrix(short *score, BYTE* op, int rows, int cols)
 {
        for (int r = 0; r < rows; r++)
     {
