@@ -16,7 +16,7 @@
 #define INSERTED 2
 #define SUBSTITUTED 3
 
-TYPEDEF uint8_t BYTE
+typedef uint8_t  BYTE;
 
 // Prototypes
 void init_matrix(short* score, BYTE* op, int rows, int cols);
