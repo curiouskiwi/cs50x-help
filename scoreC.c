@@ -1,9 +1,9 @@
 /* scoreC.c
 *   compute edit distance between two texts
 *   (assumes plain ascii text)
-*   implemented with 2 arrays (one for optimal score and 
+*   implemented with 2 arrays (one for optimal score and
 *   the other for the operation taken)
-*   
+*
 *   brenda anderson
 *   2017-10-23
 */
@@ -19,7 +19,7 @@
 typedef uint8_t  BYTE;
 
 // Prototypes
-void init_matrix(short* score, BYTE* op, int rows, int cols);
+void init_matrix(short *score, BYTE *op, int rows, int cols);
 void fill_matrix(short *score, BYTE *op, int rows, int col, char *f1, char *f2 );
 void print_matrix(short *score, BYTE *op, int rows, int cols);
 
@@ -40,7 +40,10 @@ int main(int argc, char *argv[])
     FILE *file2 = fopen(argv[2], "r");
     if (file2 == NULL)
     {
-        if (file1) fclose(file1);
+        if (file1)
+        {
+            fclose(file1);
+        }
         printf("could not open file2\n");
         return -1;
     }
@@ -60,9 +63,17 @@ int main(int argc, char *argv[])
 
     // Get memory for each string
     char *f1 = malloc(rows);
-    if (f1 == NULL) return -1;
+    if (f1 == NULL)
+    {
+        printf("couldn't create string\n");
+        return -1;
+    }
     char *f2 = malloc(cols);
-    if (f2 == NULL) return -1;
+    if (f2 == NULL)
+    {
+        printf("couldn't create string\n");
+        return -1;
+    }
 
     // Read files into string
     fread(f1, 1, len1, file1);
@@ -70,10 +81,10 @@ int main(int argc, char *argv[])
     fread(f2, 1, len2, file2);
     f2[len2] = '\0';
 
-    short *score = calloc(1,rows*cols*sizeof(short));
-    BYTE *op = calloc(1,rows*cols*sizeof(BYTE));
 
     // Initialize the matrix
+    short *score = calloc(1, rows * cols * sizeof(short));
+    BYTE *op = calloc(1, rows * cols * sizeof(BYTE));
     init_matrix(score, op, rows, cols);
 
     // Fill the matrix
@@ -83,38 +94,44 @@ int main(int argc, char *argv[])
     // printf("Text1:\n %s\n", f1);
     // printf("Text2:\n %s\n", f2);
     // print_matrix(score, op, rows, cols);
-    
-   // Final score 
-   printf("%i\n", score[len1*cols + len2]);
 
-   // Tidy up
-   free(score);
-   free(op);
-   free(f1);
-   free(f2);
-   fclose(file1);
-   fclose(file2);
+    // Final score
+    printf("%i\n", score[len1*cols + len2]);
 
-   return 0;
+    // Tidy up
+    free(score);
+    free(op);
+    free(f1);
+    free(f2);
+    fclose(file1);
+    fclose(file2);
+
+    // All done
+    return 0;
 }
 
 /*
 * Sets the first row and column based on text lengths
 */
-void init_matrix(short* score, BYTE* op, int rows, int cols)
+void init_matrix(short *score, BYTE *op, int rows, int cols)
 {
 
     score[0] = 0;
     op[0] = 0;
 
+    // Initialize all columns in Row 0
+    // Blank string to any char(s) is an Insert
     for (int col = 1; col < cols; col++)
     {
-        score[col] = score[col-1]+1;
+        score[col] = score[col-1] + 1;
         op[col] = INSERTED;
     }
+
+    // Initialize all rows in Column 0
+    // Any char(s) to blank string is a Delete
     for (int row = 1; row < rows; row++)
     {
-        score[row*cols] = score[(row-1)*cols]+1;
+        score[row*cols] = score[(row-1)*cols] + 1;
         op[row*cols] = DELETED;
     }
 
@@ -131,10 +148,13 @@ void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 
         for (int col = 1; col < cols; col++)
         {
            // Substitution first as that is potential lowest cost
+
+           // If the chars are the same, then no cost
            if (f1[row-1] == f2[col-1])
             {
                 s = score[(row-1)*cols + col-1];
             }
+            // Else the cost is 1
             else
             {
                 s = score[(row-1)*cols + col-1] + 1;
@@ -142,7 +162,7 @@ void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 
             lowest_score = s;
             lowest_op = SUBSTITUTED;
 
-           // Deletion
+           // Deleting a char has cost of 1
             d = score[(row-1)*cols + col] + 1;
             if (d < lowest_score)
             {
@@ -150,14 +170,14 @@ void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 
                 lowest_op = DELETED;
             }
 
-           // Insertion
+           // Inserting a char has cost of 1
             i = score[row*cols + col-1] + 1;
             if (i < lowest_score)
             {
                 lowest_score = i;
                 lowest_op = INSERTED;
             }
-            
+
             // Now fill the cell with the optimal path values
             score[row*cols + col] = lowest_score;
             op[row*cols + col] = lowest_op;
@@ -168,13 +188,14 @@ void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 
 /*
 * Prints the matrix for debugging purposes
 */
-void print_matrix(short *score, BYTE* op, int rows, int cols)
+void print_matrix(short *score, BYTE *op, int rows, int cols)
 {
        for (int r = 0; r < rows; r++)
     {
         for (int c = 0; c < cols; c++)
-            printf(" %2i:%i", score[r*cols + c],op[r*cols + c]);
-
+        {
+            printf(" %2i:%i", score[r*cols + c], op[r*cols + c]);
+        }
         printf("\n");
     }
 }
