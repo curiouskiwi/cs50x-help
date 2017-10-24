@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     if (argc != 3)
     {
         printf("usage: ./scoreC FILE1 FILE2");
+        return -1;
     }
 
     // Verify the two files can be opened
