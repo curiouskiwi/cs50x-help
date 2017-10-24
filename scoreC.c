@@ -16,7 +16,7 @@
 #define INSERTED 2
 #define SUBSTITUTED 3
 
-typedef uint8_t  BYTE;
+typedef uint8_t BYTE;
 
 // Prototypes
 void init_matrix(short *score, BYTE *op, int rows, int cols);
@@ -40,10 +40,8 @@ int main(int argc, char *argv[])
     FILE *file2 = fopen(argv[2], "r");
     if (file2 == NULL)
     {
-        if (file1)
-        {
-            fclose(file1);
-        }
+        // file1 was opened, so close it
+        fclose(file1);
         printf("could not open file2\n");
         return -1;
     }
@@ -59,8 +57,7 @@ int main(int argc, char *argv[])
 
     int rows = len1 + 1;
     int cols = len2 + 1;
-    printf("rows: %i\ncols: %i\n", rows, cols);
-
+    
     // Get memory for each string
     char *f1 = malloc(rows);
     if (f1 == NULL)
@@ -91,6 +88,7 @@ int main(int argc, char *argv[])
     fill_matrix(score, op, rows, cols, f1, f2);
 
     // DEBUG printing
+    // printf("rows: %i\ncols: %i\n", rows, cols);
     // printf("Text1:\n %s\n", f1);
     // printf("Text2:\n %s\n", f2);
     // print_matrix(score, op, rows, cols);
@@ -134,8 +132,9 @@ void init_matrix(short *score, BYTE *op, int rows, int cols)
         score[row*cols] = score[(row-1)*cols] + 1;
         op[row*cols] = DELETED;
     }
-
 }
+
+
 /*
 * Calculates the scores for each cell based on the chars in the text
 */
@@ -148,7 +147,6 @@ void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 
         for (int col = 1; col < cols; col++)
         {
            // Substitution first as that is potential lowest cost
-
            // If the chars are the same, then no cost
            if (f1[row-1] == f2[col-1])
             {
@@ -185,12 +183,13 @@ void fill_matrix(short *score, BYTE *op, int rows, int cols, char *f1, char *f2 
     }
 }
 
+
 /*
 * Prints the matrix for debugging purposes
 */
 void print_matrix(short *score, BYTE *op, int rows, int cols)
 {
-       for (int r = 0; r < rows; r++)
+    for (int r = 0; r < rows; r++)
     {
         for (int c = 0; c < cols; c++)
         {
