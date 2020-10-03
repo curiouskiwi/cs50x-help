@@ -85,5 +85,5 @@ More here: https://en.wikipedia.org/wiki/Data_segment.
 So how to solve this?  If you want a string that you can change, you can declare it as a char array instead:
 
 ```C
-char name[] = "hello";
+char name[] = "hello, world!";
 ```
