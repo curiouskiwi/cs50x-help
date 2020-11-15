@@ -1,3 +1,5 @@
+**FAQ:  I'm not sure how the whole Tabulate process is meant to work in Runoff**
+
 To complete tabulate, you have to have a clear understanding of what the preferences array is showing you.  Once you have that, it's actually very straightforward few lines.
 The preferences array holds the preferences for each voter.  So, voter 0 (the first voter)'s preferences are in `preferences[0]`.  Voter 1 (the second voter)'s preferences are in `preferences[1]`.  etc etc.
 Now, preferences is a 2d array, which means that each voters preferences are in a row.  And the columns in that row represent the order of their preferences.  So column 0 is their first preferred candidate.  Column 1 is their second preferred candidate, etc etc
