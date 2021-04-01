@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
 
         strcpy(temp_path, CS50_TEXTS);
         strcat(temp_path, dir->d_name);
-        printf("name is %s\n", dir->d_name);
+        
         if (dir->d_name[0] == '.') continue;
         records[f]->path = temp_path;
 
