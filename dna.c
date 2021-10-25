@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Assumptions about the files
+// Assumptions about the csv file
 #define MAXSTRS 10
 #define MAXLINELENGTH 100
 #define MAXLINES 25
@@ -30,6 +30,14 @@ int main(int argc, char *argv[])
         return 2;
     }
 
+    // read in the sequences text
+    char *s = get_seq(argv[2]);
+    if (s == NULL)
+    {
+        printf("could not open sequence file\n");
+        return 3;
+    }
+ 
     char *strs[MAXSTRS];
     char buff[MAXLINELENGTH];
     // read in the first line to get the STR names
@@ -44,14 +52,6 @@ int main(int argc, char *argv[])
         strs[strcount] = strtok(NULL, ",");
         if (!strs[strcount])
             break;
-    }
-
-    // read in the sequences text
-    char *s = get_seq(argv[2]);
-    if (s == NULL)
-    {
-        printf("could not open sequence file\n");
-        return 3;
     }
 
     // array to hold the longest consecutive counts for each STR
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 }
 
 
-// opens the sequences text file and returns it as a string
+// opens the sequences text file and returns it as a string, returns NULL on failure
 char *get_seq(const char *txt)
 {
     FILE *f = fopen(txt, "r");
