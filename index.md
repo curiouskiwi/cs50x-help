@@ -24,6 +24,9 @@ You may find it easier to debug your filters using a smaller bitmap file than th
 A simple [hash function you can try](hash.c)
 
 
+## Final Project
+
+Be sure that your README.md is comprehensive enough, per the requirements shown in the specification.  Here's an [example of a project README file](finalproject_sampleREADME.md) that I did for my own project years ago. 
 
 ## Other Concepts you might need to know
 
