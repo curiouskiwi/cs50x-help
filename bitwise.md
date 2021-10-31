@@ -28,4 +28,4 @@ or, say that `buffer[3]` is `0xc7`
 ```
 Using the bitwise AND in our condition is a quick way to compare one number to a range of others in one step.
 
-More information about bitwise in C: https://en.wikipedia.org/wiki/Bitwise_operations_in_C
+More information about bitwise in C: [Bitwise Operations in C - wikipedia](https://en.wikipedia.org/wiki/Bitwise_operations_in_C)
