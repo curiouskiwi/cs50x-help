@@ -1,5 +1,13 @@
 ## Hints for CS50x problem sets
 
+### Problem Set 2 - Caesar
+
+[FAQ: I don't understand the Caesar formula and how the modulo 26 fits in.  Why do we use that?](caesar-formula.md)
+
+[FAQ: Caesar check50 says I'm failing, but it looks right to me](caesar-check50.md)
+
+
+
 ### Problem Set 3 - Tabulate
 
 [FAQ: I'm not sure how the whole Tabulate process is meant to work in Runoff. I've watched the Walkthrough but I'm still confused!](tabulate.md)
