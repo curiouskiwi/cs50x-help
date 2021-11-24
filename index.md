@@ -23,6 +23,10 @@ You may find it easier to debug your filters using a smaller bitmap file than th
 
 A simple [hash function you can try](hash.c)
 
+### Problem Set 7 - Finance
+
+Sometimes you may want to test your quote/buy/sell/index functions using prices/stocks that you know won't change.  Or, the IEX API may be acting up and isn't returning any values.  In these cases, a temporary `lookup` function in `helpers.py` works well.  Open `helpers.py` and comment out the `lookup` function and then paste in this [lookup function for testing](lookup_finance.py)
+
 
 ## Final Project
 
