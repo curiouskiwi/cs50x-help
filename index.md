@@ -17,10 +17,10 @@
 
 You may find it easier to debug your filters using a smaller bitmap file than the ones given in the distribution code.
 
-* A small [3x3 bitmap](3x3.bmp) 
-* A small [3x3 bitmap for Edges](3e.bmp)
-* A small [4x4 bitmap](4x4.bmp)
-* A small [4x4 bitmap for Edges](4e.bmp)
+* A small 3x3 bitmap(`wget http://github.com/curiouskiwi/cs50x-help/raw/master/3x3.bmp`) 
+* A small 3x3 bitmap for Edges(`wget http://github.com/curiouskiwi/cs50x-help/raw/master/3e.bmp`)
+* A small 4x4 bitmap(`wget http://github.com/curiouskiwi/cs50x-help/raw/master/4x4.bmp`)
+* A small 4x4 bitmap for Edges(`wget http://github.com/curiouskiwi/cs50x-help/raw/master/4e.bmp`)
 
 ### Problem Set 4 - Recover
 
