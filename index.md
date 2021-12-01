@@ -26,6 +26,9 @@ You may find it easier to debug your filters using a smaller bitmap file than th
 
 [FAQ: What does that final condition in the JPG signature check mean?](bitwise.md)
 
+### Lab 5 - Inheritance
+
+[FAQ: I don't get how you use recursion to free the entire family?](freefamily.md)
 
 ### Problem Set 5 - Speller
 
