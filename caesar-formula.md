@@ -1,6 +1,6 @@
 **FAQ: I don't understand the Caesar formula and how the modulo 26 fits in.  Why do we use that?**
 
-The caesar cipher formula  $(p + k) \% 26$  works on the premise that `p` (the plain text character) has a value of 0 - 25  (representing a - z or A - Z)
+The caesar cipher formula  `(p + k) % 26` works on the premise that `p` (the plain text character) has a value of 0 - 25  (representing a - z or A - Z)
 
 So if your plain char is 'x', that would have a value of 23, and if your key was 2, then the ciphered char would be 
   ``` 
