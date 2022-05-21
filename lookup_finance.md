@@ -2,7 +2,7 @@
 # Hard coded stock for testing CS50 Finance without using the API 
 # Useful for testing scenarios of pricing/formatting with certainty 
 
-def lookup():
+def lookup(symbol):
 
     if symbol == "AAAA":
         return {"name": "Test A", "price": 28.00, "symbol": "AAAA"}
