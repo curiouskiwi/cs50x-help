@@ -70,7 +70,7 @@ void build_rotated_array(int size, int *nums, int rotates)
 // uses a linear search to find the rotation
 int num_rotations_loop(int len, int *nums)
 {
-    if (nums[0] < nums[len-1]) 
+    if (nums[0] < nums[len - 1]) 
         return 0;
     for (int i = 1; i < len; i++)
         if (nums[i] < nums[i - 1])
