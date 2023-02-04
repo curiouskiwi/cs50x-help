@@ -2,7 +2,8 @@
 
 ### Getting Started
 
-<img src="HowToTakeCS50x.png" width = 50%>
+![HowToTakeCS50x](HowToTakeCS50x.png)
+
 
 ### Writing Code
 
