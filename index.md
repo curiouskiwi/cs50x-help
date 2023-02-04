@@ -1,4 +1,29 @@
-## Hints for CS50x problem sets
+## Hints for CS50x 
+
+### Getting Started
+
+<img src="HowToTakeCS50x.png" width = 50%>
+
+### Writing Code
+
+David introduces the CS50 Codespace at the beginning of Lecture 1.    If you are a beginner, please do not try to set up your own computer to do the course but use the CS50 Codespace as David does throughout the course.  You will save yourself a lot of headaches. 🙂
+
+Here's the  link to open the [Codespace](https://code.cs50.io/)
+
+And here's the part of the lecture where he introduces it, in case you missed it and want to revisit.
+
+[![Using the Codespace](http://img.youtube.com/vi/U29J1tXcPqo/0.jpg)](http://www.youtube.com/clip/UgkxUGHzMaQRblCNdSECaBuEuWgsSbHFsIiq  "FAQ: Where will I write my code?")
+
+### Compiling your programs
+
+#### FAQ:  I'm trying to compile my program and I get " no rule to make target 'population' "  How do I fix that? 
+
+You probably see a prompt in your terminal with just `$` which indicates that you have not attached your terminal to the folder/directory where you have saved your `population.c` source code.  Be sure to `cd population` to move into that folder first.  You can then confirm your file is there by running ls and you should see `population.c`.  Now, you can run `make population` to compile your program.
+
+Here's a clip from lecture 1 where David illustrates this issue, if you'd like to review:
+
+[![Solving compile issue](http://img.youtube.com/vi/ywg7cW0Txs4/0.jpg)](https://youtube.com/clip/UgkxfJlhpdKf4sY8VoPfaFkMRB-JOT-CmAE_ "FAQ: Why do I get 'No rule to make target?")
+
 
 ### Problem Set 2 - Caesar
 
