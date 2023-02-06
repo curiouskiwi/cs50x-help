@@ -2,7 +2,7 @@
 
 ### Getting Started
 
-![HowToTakeCS50x](HowToTakeCS50x.png)
+![HowToTakeCS50x](HowToTakeCS50x2023-sm.png)
 
 
 ### Writing Code
