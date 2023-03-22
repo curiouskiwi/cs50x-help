@@ -11,9 +11,6 @@ David introduces the CS50 Codespace at the beginning of Lecture 1.    If you are
 
 Here's the  link to open the [Codespace](https://code.cs50.io/)
 
-And here's the part of the lecture where he introduces it, in case you missed it and want to revisit.
-
-[![Using the Codespace](http://img.youtube.com/vi/U29J1tXcPqo/0.jpg)](http://www.youtube.com/clip/UgkxUGHzMaQRblCNdSECaBuEuWgsSbHFsIiq  "FAQ: Where will I write my code?")
 
 ### Compiling your programs
 
